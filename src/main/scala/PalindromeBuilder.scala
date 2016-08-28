@@ -13,7 +13,9 @@ object PalindromeBuilder extends App {
     evens zip odds
   }.toOption
 
-  def substrings(s: String, l: Int): List[String] = List()
+  def substrings(s: String, l: Int): List[String] = (0 to (s.length - l))
+    .map(i => s.drop(i).take(l))
+    .toList 
 
   def palindromes(a: String, b: String): List[String] = {
     val startLength = Math.min(a.length, b.length)
