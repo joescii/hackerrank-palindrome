@@ -5,9 +5,7 @@ import java.io.{BufferedReader, InputStream, InputStreamReader}
 import scala.util.Try
 
 object PalindromeBuilder extends App {
-  type Input = List[(String, String)]
-  type Output = List[String]
-  def parseInput(is: InputStream): Option[Input] = Try {
+  def parseInput(is: InputStream): Option[List[(String, String)]] = Try {
     val r = new BufferedReader(new InputStreamReader(is))
     val lines = Iterator.continually(r.readLine()).takeWhile(_ != null).drop(1).toList.zipWithIndex
     val odds = lines.filter(_._2 % 2 == 1).map(_._1)
@@ -15,7 +13,12 @@ object PalindromeBuilder extends App {
     evens zip odds
   }.toOption
 
+  def substrings(s: String, l: Int): List[String] = List()
+
   def palindromes(a: String, b: String): List[String] = {
+    val startLength = Math.min(a.length, b.length)
+    val s = Stream.from(startLength, -1).takeWhile(_ > 0)
+
     List()
   }
 
