@@ -15,10 +15,12 @@ object PalindromeBuilder extends App {
     evens zip odds
   }.toOption
 
-  def palindromes(a:String, b:String):String = {
-    "test"
+  def palindromes(a: String, b: String): List[String] = {
+    List()
   }
 
   val input = parseInput(System.in)
-  input.map(_.map { case (a, b) => System.out.println(palindromes(a, b))})
+  input.map(_.map { case (a, b) => System.out.println(
+    palindromes(a, b).sorted.headOption.getOrElse("-1")
+  )})
 }
