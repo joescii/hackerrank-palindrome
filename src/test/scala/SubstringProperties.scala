@@ -29,16 +29,16 @@ object SubstringProperties extends Properties("substrings()") {
   }
 
   property("substrings with max length should return a list containing only the string") = forAll(substringInput) { case (s, l) =>
-    substrings(s, s.length).map(_.str) == List(s)
+    substrings(s, s.length).map(_.str).toList == List(s)
   }
 
   property("all substrings except the last will have behind defined") = forAll(substringInput) { case (s, l) =>
-    val init = substrings(s, l).init
+    val init = substrings(s, l).toList.init
     init.filter(_.behind.isDefined) == init
   }
 
   property("the last substring will never have behind defined") = forAll(substringInput) { case (s, l) =>
-    substrings(s, l).last.behind == None
+    substrings(s, l).toList.last.behind == None
   }
 
   property("all of the 'behinds' should define a suffix of the original string") = forAll(substringInput) { case (s, l) =>

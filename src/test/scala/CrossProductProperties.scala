@@ -9,16 +9,16 @@ import Solution.crossProduct
 object CrossProductProperties extends Properties("crossProduct()") {
   property("crossProduct() should produce a list with length of the product of input lengths") =
     forAll(nonEmptyListOf(alphaStr), nonEmptyListOf(alphaStr)) { (a, b) =>
-      crossProduct(a, b).length == a.length * b.length
+      crossProduct(a, b).toList.length == a.length * b.length
     }
 
   property("crossProduct().map(_._1) should have the same elements as the input") =
     forAll(nonEmptyListOf(alphaStr), nonEmptyListOf(alphaStr)) { (a, b) =>
-      crossProduct(a, b).map(_._1).toSet == a.toSet
+      crossProduct(a, b).toList.map(_._1).toSet == a.toSet
     }
 
   property("crossProduct().map(_._2) should have the same elements as the input") =
     forAll(nonEmptyListOf(alphaStr), nonEmptyListOf(alphaStr)) { (a, b) =>
-      crossProduct(a, b).map(_._2).toSet == b.toSet
+      crossProduct(a, b).toList.map(_._2).toSet == b.toSet
     }
 }
