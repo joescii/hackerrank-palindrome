@@ -33,9 +33,14 @@ object PalindromeBuilder extends App {
       .map(length => crossProduct(substrings(a, length), substrings(b.reverse, length)))
       .map(strs => strs.filter { case (a, b) => a === b })
       .find(!_.isEmpty)
-      .map(_.map { case ((a, _), (b, _)) =>
-        a + b.reverse
-      })
+      .map(_.map { case ((a, ab), (b, bb)) =>
+        val middle:String = List(
+          (ab zip bb).map{ case (a, b) => if(a < b) a else b }.headOption,
+          ab, bb
+        ).flatten.headOption.map(_.toString).getOrElse("")
+        a + middle + b.reverse
+        }.sorted
+      )
       .getOrElse(List())
   }
 

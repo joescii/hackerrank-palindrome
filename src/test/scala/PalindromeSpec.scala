@@ -7,7 +7,7 @@ import PalindromeBuilder._
 class PalindromeSpec extends WordSpec with ShouldMatchers {
   "palindrome()" should {
     "find 'aba' from 'bac', 'bac'" in {
-      palindromes("bac", "bac") shouldEqual List("aba")
+      palindromes("bac", "bac") shouldEqual List("aba", "bab", "cac")
     }
 
     "find nothing from 'abc', 'def'" in {
