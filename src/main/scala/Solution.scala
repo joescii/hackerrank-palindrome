@@ -12,31 +12,21 @@ object Solution extends App {
     evens.map(_._1) zip odds.map(_._1)
   }.toOption
 
-  type Substring = (String, Option[Char])
-  implicit class SubstringOps(val s: Substring) extends AnyVal {
-    def === (other:Substring): Boolean = s._1 == other._1
-    def str = s._1
-    def behind = s._2
-  }
-
-  def substrings(s: String, l: Int): TraversableOnce[Substring] = Stream.from(0).takeWhile(_ <= s.length - l)
-    .map(i => (s.drop(i).take(l), s.lift(i + l)))
+  def substrings(s: String, l: Int): TraversableOnce[String] = Stream.from(0).takeWhile(_ <= s.length - l)
+    .map(i => s.drop(i).take(l))
 
   def crossProduct[A, B](a: TraversableOnce[A], b: TraversableOnce[B]): TraversableOnce[(A, B)] = for { i <- a; j <- b } yield (i, j)
 
+  def isPalindrome(s: String): Boolean = s == s.reverse
+
   def palindromes(a: String, b: String): List[String] = {
-    val startLength = Math.min(a.length, b.length)
+    val startLength = a.length + b.length
 
     Iterator.from(startLength, -1).takeWhile(_ > 0)
       .map(length => crossProduct(substrings(a, length), substrings(b.reverse, length)))
-      .map(strs => strs.filter { case (a, b) => a === b })
       .find(!_.isEmpty)
-      .map(_.map { case ((a, ab), (b, bb)) =>
-          val middle:String = List(
-            (ab zip bb).map{ case (a, b) => if(a < b) a else b }.headOption,
-            ab, bb
-          ).flatten.headOption.map(_.toString).getOrElse("")
-          a + middle + b.reverse
+      .map(_.map { case (a, b) =>
+          a + b.reverse
         }.toList.sorted
       )
       .getOrElse(List())
