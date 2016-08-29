@@ -2,7 +2,7 @@ package com.joescii
 
 import org.scalatest.{ShouldMatchers, WordSpec}
 
-import PalindromeBuilder._
+import Solution._
 
 class PalindromeSpec extends WordSpec with ShouldMatchers {
   "palindrome()" should {

@@ -4,7 +4,7 @@ import org.scalacheck.{Gen, Prop, Properties}
 import Prop._
 import Gen._
 
-import PalindromeBuilder.crossProduct
+import Solution.crossProduct
 
 object CrossProductProperties extends Properties("crossProduct()") {
   property("crossProduct() should produce a list with length of the product of input lengths") =

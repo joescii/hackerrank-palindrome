@@ -3,7 +3,7 @@ package com.joescii
 import org.scalacheck.{Gen, Prop, Properties}
 import Prop._
 
-import PalindromeBuilder._
+import Solution._
 
 object SubstringProperties extends Properties("substrings()") {
   import Generators._
