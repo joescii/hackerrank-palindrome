@@ -21,10 +21,16 @@ object PalindromeBuilder extends App {
 
   def palindromes(a: String, b: String): List[String] = {
     val startLength = Math.min(a.length, b.length)
-    val s = Stream.from(startLength, -1).takeWhile(_ > 0)
-      .map(length => crossProduct(substrings(a, length), substrings(b, length)))
 
-    List()
+    Stream.from(startLength, -1).takeWhile(_ > 0)
+      .map(length => crossProduct(substrings(a, length), substrings(b.reverse, length)))
+      .map(strs => strs.filter { case (a, b) => a == b })
+      .find(!_.isEmpty)
+      .map(_.map { case (a, b) =>
+        
+        a + b.reverse
+      })
+      .getOrElse(List())
   }
 
   val input = parseInput(System.in)
