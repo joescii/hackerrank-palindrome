@@ -17,5 +17,13 @@ class PalindromeSpec extends WordSpec with ShouldMatchers {
     "find 'dfhfd' from 'jdfh', 'fds'" in {
       palindromes("jdfh", "fds") shouldEqual List("dfhfd")
     }
+
+    "find 'abccba' from 'abc', 'cba'" in {
+      palindromes("abc", "cba") shouldEqual (List("abccba"))
+    }
+
+    "find 'aca' from 'bac', 'ac'" in {
+      palindromes("bac", "ac") shouldEqual List("aca", "cac")
+    }
   }
 }
