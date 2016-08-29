@@ -32,15 +32,6 @@ object SubstringProperties extends Properties("substrings()") {
     substrings(s, s.length).map(_.str) == List(s)
   }
 
-  property("the first substring will never have ahead defined") = forAll(substringInput) { case (s, l) =>
-    substrings(s, l).head.ahead == None
-  }
-
-  property("all substrings except the first will have ahead defined") = forAll(substringInput) { case (s, l) =>
-    val tail = substrings(s, l).tail
-    tail.filter(_.ahead.isDefined) == tail
-  }
-
   property("all substrings except the last will have behind defined") = forAll(substringInput) { case (s, l) =>
     val init = substrings(s, l).init
     init.filter(_.behind.isDefined) == init
@@ -48,10 +39,6 @@ object SubstringProperties extends Properties("substrings()") {
 
   property("the last substring will never have behind defined") = forAll(substringInput) { case (s, l) =>
     substrings(s, l).last.behind == None
-  }
-
-  property("all of the 'aheads' should define a prefix of the original string") = forAll(substringInput) { case (s, l) =>
-    s.startsWith(substrings(s, l).flatMap(_.ahead).mkString)
   }
 
   property("all of the 'behinds' should define a suffix of the original string") = forAll(substringInput) { case (s, l) =>
