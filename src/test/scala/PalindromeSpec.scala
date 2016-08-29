@@ -25,5 +25,17 @@ class PalindromeSpec extends WordSpec with ShouldMatchers {
     "find 'aca' from 'bac', 'ac'" in {
       palindromes("bac", "ac") shouldEqual List("aca", "cac")
     }
+
+    "find 'cc' from 'c', 'c'" in {
+      palindromes("c", "c") shouldEqual List("cc")
+    }
+
+    "find 'cc' from 'stuffc', 'c'" in {
+      palindromes("stuffc", "c") shouldEqual List("cc")
+    }
+
+    "complete a palindrome" in {
+      palindromes("abcdedcb", "a") shouldEqual List("abcdedcba")
+    }
   }
 }
