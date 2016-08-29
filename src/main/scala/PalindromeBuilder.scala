@@ -15,11 +15,14 @@ object PalindromeBuilder extends App {
 
   def substrings(s: String, l: Int): List[String] = (0 to (s.length - l))
     .map(i => s.drop(i).take(l))
-    .toList 
+    .toList
+
+  def crossProduct[A, B](a: List[A], b: List[B]): List[(A, B)] = for { i <- a; j <- b } yield (i, j)
 
   def palindromes(a: String, b: String): List[String] = {
     val startLength = Math.min(a.length, b.length)
     val s = Stream.from(startLength, -1).takeWhile(_ > 0)
+      .map(length => crossProduct(substrings(a, length), substrings(b, length)))
 
     List()
   }
