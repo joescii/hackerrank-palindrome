@@ -45,5 +45,9 @@ class PalindromeSpec extends WordSpec with ShouldMatchers {
     "return a palindrome if it is in the input and the other argument contributes nothing to it" in {
       palindromes("juabcbank", "def") shouldEqual List("abcba")
     }
+
+    "find the largest palindrome in ‘abc’ and ‘dedcba’" in {
+      palindromes("abc", "dedcba") shouldEqual List("abcdedcba")
+    }
   }
 }
